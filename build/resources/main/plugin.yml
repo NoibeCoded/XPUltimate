@@ -1,0 +1,55 @@
+name: XpBottles
+version: 2.0.0
+description: Store XP in bottles and transfer between players
+author: NoibeCoded
+
+main: me.noibecoded.xpbottles.XpBottles
+
+api-version: 1.19
+
+softdepend:
+  - Vault
+  - PlaceholderAPI
+
+commands:
+  xpbottle:
+    description: XP Bottle command
+    usage: /xpbottle [create|deposit|withdraw|transfer|balance]
+    permission: xpbottles.use
+    permission-message: You don't have permission to use this command.
+
+permissions:
+  xpbottles.*:
+    description: All permissions
+    children:
+      xpbottles.create: true
+      xpbottles.deposit: true
+      xpbottles.withdraw: true
+      xpbottles.transfer: true
+      xpbottles.balance: true
+      xpbottles.reset: true
+      xpbottles.reset.others: true
+  xpbottles.use:
+    description: Use XP bottle commands
+    default: true
+  xpbottles.create:
+    description: Create XP bottles
+    default: true
+  xpbottles.deposit:
+    description: Deposit XP to bank
+    default: true
+  xpbottles.withdraw:
+    description: Withdraw XP from bank
+    default: true
+  xpbottles.transfer:
+    description: Transfer XP to other players
+    default: true
+  xpbottles.balance:
+    description: Check XP balance
+    default: true
+  xpbottles.reset:
+    description: Reset own XP bank
+    default: op
+  xpbottles.reset.others:
+    description: Reset other players' XP bank
+    default: op

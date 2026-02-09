@@ -1,0 +1,81 @@
+# XpBottles Permissions Configuration
+# Generated automatically by XpBottles
+#
+# This file contains permission groups and user-specific permissions
+# for the XpBottles plugin. Modify this file to customize permissions
+# for different groups on your server.
+#
+# To use groups with permissions plugins (LuckPerms, PermissionsEx, etc.),
+# configure the groups below in your preferred permissions plugin.
+
+# ==============================
+# Permission Groups
+# ==============================
+
+groups:
+  # Default group - new players get these permissions
+  default:
+    permissions:
+      - xpbottles.use
+      - xpbottles.create
+      - xpbottles.deposit
+      - xpbottles.withdraw
+      - xpbottles.transfer
+      - xpbottles.balance
+
+  # VIP group - additional permissions
+  vip:
+    permissions:
+      - xpbottles.*
+
+  # Admin group - all permissions including reset
+  admin:
+    permissions:
+      - xpbottles.*
+
+# ==============================
+# User-Specific Permissions
+# ==============================
+#
+# Add user-specific permissions below.
+# Example:
+#
+# users:
+#   playername:
+#     group: default
+#     permissions:
+#       - xpbottles.reset
+#
+#   adminname:
+#     group: admin
+#     permissions: []
+
+users:
+  # Add users here
+  # username:
+  #   group: default
+  #   permissions:
+  #     - xpbottles.reset
+
+# ==============================
+# Notes
+# ==============================
+#
+# Available permissions:
+#   xpbottles.use        - Use the /xpbottle command
+#   xpbottles.create    - Create XP bottles
+#   xpbottles.deposit   - Deposit XP to bank
+#   xpbottles.withdraw  - Withdraw XP from bank
+#   xpbottles.transfer  - Transfer XP to other players
+#   xpbottles.balance   - Check XP balance
+#   xpbottles.reset     - Reset own XP bank
+#   xpbottles.reset.others - Reset other players' XP bank
+#   xpbottles.*         - All permissions
+#
+# Commands:
+#   /xpbottle create <amount>  - Create XP bottle
+#   /xpbottle deposit <amount> - Deposit XP to bank
+#   /xpbottle withdraw <amount> - Withdraw XP from bank
+#   /xpbottle transfer <player> <amount> - Transfer XP to player
+#   /xpbottle balance - Check balances
+#   /xpbottle reset [player] - Reset XP (admin)
