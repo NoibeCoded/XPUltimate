@@ -30,6 +30,10 @@ public class ConfigManager {
     private boolean enableCraftingTable;
     private String craftingTableName;
 
+    private String resourcePackUrl;
+    private String resourcePackHash;
+    private boolean requireResourcePack;
+
     public ConfigManager(JavaPlugin plugin) {
         this.plugin = plugin;
     }
@@ -67,6 +71,10 @@ public class ConfigManager {
         maxXpPerBottle = config.getInt("bottles.max-xp-per-bottle", 10000);
         enableCraftingTable = config.getBoolean("crafting.enabled", true);
         craftingTableName = config.getString("crafting.table-name", "&6XP Bottle Crafting Table");
+
+        resourcePackUrl = config.getString("resourcepack.url", "");
+        resourcePackHash = config.getString("resourcepack.hash", "");
+        requireResourcePack = config.getBoolean("resourcepack.required", false);
     }
 
     private void createDefaultConfig() {
@@ -99,6 +107,10 @@ public class ConfigManager {
         config.set("bottles.max-xp-per-bottle", maxXpPerBottle);
         config.set("crafting.enabled", enableCraftingTable);
         config.set("crafting.table-name", craftingTableName);
+
+        config.set("resourcepack.url", resourcePackUrl);
+        config.set("resourcepack.hash", resourcePackHash);
+        config.set("resourcepack.required", requireResourcePack);
 
         try {
             config.save(configFile);
@@ -221,6 +233,33 @@ public class ConfigManager {
 
     public void setCraftingTableName(String craftingTableName) {
         this.craftingTableName = craftingTableName;
+        saveConfig();
+    }
+
+    public String getResourcePackUrl() {
+        return resourcePackUrl;
+    }
+
+    public void setResourcePackUrl(String resourcePackUrl) {
+        this.resourcePackUrl = resourcePackUrl;
+        saveConfig();
+    }
+
+    public String getResourcePackHash() {
+        return resourcePackHash;
+    }
+
+    public void setResourcePackHash(String resourcePackHash) {
+        this.resourcePackHash = resourcePackHash;
+        saveConfig();
+    }
+
+    public boolean isResourcePackRequired() {
+        return requireResourcePack;
+    }
+
+    public void setResourcePackRequired(boolean requireResourcePack) {
+        this.requireResourcePack = requireResourcePack;
         saveConfig();
     }
 }

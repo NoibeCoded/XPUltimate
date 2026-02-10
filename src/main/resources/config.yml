@@ -36,6 +36,17 @@ crafting:
   # Name displayed for the crafting table
   table-name: "&6XP Bottle Crafting Table"
 
+# Resource Pack Configuration
+resourcepack:
+  # URL to the resource pack (.zip file)
+  # Leave empty to disable resource pack
+  url: ""
+  # SHA-1 hash of the resource pack (40 characters, optional but recommended)
+  # Generate with: sha1sum resourcepack.zip
+  hash: ""
+  # If true, players without the resource pack will be kicked
+  required: false
+
 # Messages Configuration
 messages:
   prefix: "&6[XpUltimate] &r"

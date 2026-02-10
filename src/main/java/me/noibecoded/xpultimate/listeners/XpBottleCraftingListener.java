@@ -15,6 +15,8 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.block.Lectern;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +67,11 @@ public class XpBottleCraftingListener implements Listener {
             lore.add("§7Special crafting table for XP bottles");
             lore.add("§7Place empty bottles on top and add XP");
             meta.setLore(lore);
+
+            PersistentDataContainer container = meta.getPersistentDataContainer();
+            NamespacedKey customKey = new NamespacedKey(plugin, "xp_crafting_table");
+            container.set(customKey, PersistentDataType.STRING, "xp_bottle_crafting");
+
             table.setItemMeta(meta);
         }
 

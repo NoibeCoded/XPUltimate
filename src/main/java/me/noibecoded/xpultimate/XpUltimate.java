@@ -5,14 +5,17 @@ import me.noibecoded.xpultimate.api.ServerType;
 import me.noibecoded.xpultimate.annotations.SupportedVersions;
 import me.noibecoded.xpultimate.commands.XpBottleCommand;
 import me.noibecoded.xpultimate.commands.XpBankCommand;
+import me.noibecoded.xpultimate.commands.XpUltimateCommand;
 import me.noibecoded.xpultimate.config.ConfigManager;
 import me.noibecoded.xpultimate.data.DatabaseManager;
 import me.noibecoded.xpultimate.data.XpDataManager;
 import me.noibecoded.xpultimate.listeners.BottleUseListener;
 import me.noibecoded.xpultimate.listeners.PlayerJoinListener;
+import me.noibecoded.xpultimate.listeners.ResourcePackListener;
 import me.noibecoded.xpultimate.recipes.XpBottleCraftingListener;
 import me.noibecoded.xpultimate.utils.VersionUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @SupportedVersions(versions = {
@@ -83,12 +86,14 @@ public final class XpUltimate extends JavaPlugin {
     private void registerCommands() {
         getCommand("xpbottles").setExecutor(new XpBottleCommand());
         getCommand("xpbank").setExecutor(new XpBankCommand());
+        getCommand("xpultimate").setExecutor(new XpUltimateCommand());
     }
 
     private void registerListeners() {
         Bukkit.getPluginManager().registerEvents(new BottleUseListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         Bukkit.getPluginManager().registerEvents(new XpBottleCraftingListener(this), this);
+        ResourcePackListener.register(this);
     }
 
     private void registerRecipes() {
@@ -129,5 +134,34 @@ public final class XpUltimate extends JavaPlugin {
 
     public XpDataManager getXpDataManager() {
         return xpDataManager;
+    }
+
+    public boolean sendResourcePack(Player player) {
+        String resourcePackUrl = getConfigManager().getResourcePackUrl();
+
+        if (resourcePackUrl == null || resourcePackUrl.isEmpty()) {
+            getLogger().warning("Resource pack URL not configured in config.yml");
+            return false;
+        }
+
+        String resourcePackHash = getConfigManager().getResourcePackHash();
+
+        try {
+            player.setResourcePack(resourcePackUrl, resourcePackHash);
+            player.sendMessage("§6Enviando resource pack...");
+            return true;
+        } catch (Exception e) {
+            getLogger().warning("Failed to send resource pack to " + player.getName() + ": " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean isResourcePackSupported() {
+        try {
+            Player.class.getMethod("setResourcePack", String.class, String.class);
+            return true;
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
     }
 }

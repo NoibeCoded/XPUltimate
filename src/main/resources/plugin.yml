@@ -22,6 +22,11 @@ commands:
     usage: /xpbank [deposit|withdraw|transfer|balance|interest|reset|help]
     permission: xpbank.use
     permission-message: You don't have permission to use XP Bank commands.
+  xpultimate:
+    description: Main XpUltimate commands
+    usage: /xpultimate [resourcepack|status|reload|help]
+    permission: xpultimate.use
+    permission-message: You don't have permission to use XpUltimate commands.
 
 permissions:
   xpbottles.*:
@@ -74,4 +79,16 @@ permissions:
     default: op
   xpbank.reset.others:
     description: Reset other players' XP bank
+    default: op
+
+  xpultimate.*:
+    description: All XpUltimate permissions
+    children:
+      xpultimate.use: true
+      xpultimate.reload: true
+  xpultimate.use:
+    description: Use XpUltimate main commands
+    default: true
+  xpultimate.reload:
+    description: Reload plugin configuration
     default: op
